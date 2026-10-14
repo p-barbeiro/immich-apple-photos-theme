@@ -1,0 +1,388 @@
+/* Immich - Apple / iCloud Photos style
+ * Paste into: Administration > Settings > Theme Settings > Custom CSS
+ * Selectors verified against immich-app/immich main (2026-10).
+ */
+
+/* ===================== Palette & type ===================== */
+:root {
+  --immich-primary: 0 122 255;
+  --immich-bg: 255 255 255;
+  --immich-fg: 29 29 31;
+  --immich-dark-primary: 10 132 255;
+  --immich-dark-bg: 28 28 30;
+  --immich-dark-fg: 245 245 247;
+  --immich-dark-gray: 44 44 46;
+
+  --immich-ui-primary-500: #007aff;
+  --immich-ui-primary-600: #0066d6;
+
+  --apple-accent: #007aff;
+  --apple-label-2: rgb(60 60 67 / 0.6);
+  --apple-bg: #fff;
+  --apple-bar: #f5f5f7;
+  --apple-field: #fff;
+  --apple-field-border: rgb(0 0 0 / 0.15);
+  --apple-hairline: rgb(0 0 0 / 0.1);
+  --apple-hover: rgb(0 0 0 / 0.04);
+  --apple-selected: rgb(0 0 0 / 0.075);
+  --apple-viewer-bg: #fff;
+
+  --font-sans: -apple-system, BlinkMacSystemFont, 'SF Pro Text', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+
+  /* Compact toolbar (layouts size the content from these vars) */
+  --navbar-height: 56px;
+  --navbar-height-md: 56px;
+}
+
+.dark {
+  --immich-ui-primary-500: #0a84ff;
+  --immich-ui-primary-600: #409cff;
+
+  --apple-accent: #0a84ff;
+  --apple-label-2: rgb(235 235 245 / 0.6);
+  --apple-bg: #1c1c1e;
+  --apple-bar: #2c2c2e;
+  --apple-field: rgb(255 255 255 / 0.06);
+  --apple-field-border: rgb(255 255 255 / 0.12);
+  --apple-hairline: rgb(255 255 255 / 0.1);
+  --apple-hover: rgb(255 255 255 / 0.05);
+  --apple-selected: rgb(255 255 255 / 0.1);
+  --apple-viewer-bg: #1c1c1e;
+}
+
+body, button, input, textarea, select {
+  font-family: var(--font-sans);
+}
+
+/* ===================== Header ===================== */
+#dashboard-navbar {
+  /* above the page, so its popovers (account, notifications) are never covered */
+  position: relative;
+  z-index: 50;
+  background: var(--apple-bar);
+}
+#dashboard-navbar > div {
+  padding-block: 0;
+  border-color: var(--apple-hairline);
+}
+#dashboard-navbar > div > div:last-child {
+  align-items: center;
+}
+
+#dashboard-navbar > div > div:first-child a > * {
+  height: 28px;
+  width: auto;
+}
+
+/* Header icons: blue, no pill background */
+#dashboard-navbar section button,
+#dashboard-navbar section a {
+  border-radius: 8px;
+  color: var(--apple-accent);
+  font-size: 15px;
+  font-weight: 400;
+}
+#dashboard-navbar section button:hover,
+#dashboard-navbar section a:hover {
+  background: var(--apple-hover);
+}
+#dashboard-navbar section svg {
+  width: 22px;
+  height: 22px;
+}
+
+/* Account avatar */
+#dashboard-navbar button.flex.ps-2 {
+  padding: 0;
+  margin-inline-start: 6px;
+  border-radius: 9999px;
+}
+#dashboard-navbar button.flex.ps-2:hover {
+  background: none;
+}
+#dashboard-navbar button.flex.ps-2 > *,
+#dashboard-navbar button.flex.ps-2 > * img {
+  width: 34px;
+  height: 34px;
+  font-size: 14px;
+}
+
+/* Popovers (account, notifications) */
+#dashboard-navbar .rounded-3xl.shadow-lg {
+  top: calc(var(--navbar-height) + 6px);
+  border-radius: 12px;
+  border: 1px solid var(--apple-hairline);
+  background: var(--apple-bg);
+  box-shadow: 0 10px 40px rgb(0 0 0 / 0.16);
+  color: rgb(var(--immich-fg));
+}
+.dark #dashboard-navbar .rounded-3xl.shadow-lg {
+  color: rgb(var(--immich-dark-fg));
+}
+#account-info-panel .rounded-t-3xl {
+  border-radius: 8px;
+  background: var(--apple-bar);
+}
+#account-info-panel .rounded-b-3xl {
+  border-radius: 0 0 12px 12px;
+}
+#account-info-panel .text-primary {
+  color: inherit;
+  font-weight: 600;
+}
+#dashboard-navbar .rounded-3xl.shadow-lg a,
+#dashboard-navbar .rounded-3xl.shadow-lg button {
+  color: inherit;
+}
+
+/* Search field: white box with gray border, right side */
+#dashboard-navbar .max-w-5xl {
+  max-width: 22rem;
+  margin-inline-start: auto;
+  align-self: center;
+}
+#main-search-bar {
+  display: block;
+  height: 36px;
+  padding-block: 0;
+  padding-inline-start: 34px;
+  border: 1px solid var(--apple-field-border);
+  border-radius: 8px;
+  background: var(--apple-field);
+  color: rgb(var(--immich-fg));
+  font-size: 15px;
+  box-shadow: none;
+}
+.dark #main-search-bar {
+  color: rgb(var(--immich-dark-fg));
+}
+#main-search-bar::placeholder {
+  color: var(--apple-label-2);
+}
+#main-search-bar:focus {
+  outline: 3px solid color-mix(in srgb, var(--apple-accent) 40%, transparent);
+  outline-offset: 0;
+}
+#main-search-bar[aria-expanded='true'] {
+  border-radius: 8px 8px 0 0;
+}
+form[role='search'] > div.absolute {
+  padding-inline: 8px;
+}
+form[role='search'] > div.absolute button {
+  width: 20px;
+  height: 20px;
+  min-width: 0;
+  padding: 0;
+  color: var(--apple-label-2);
+}
+form[role='search'] > div.absolute button:hover {
+  background: none;
+}
+form[role='search'] > div.absolute svg {
+  width: 18px;
+  height: 18px;
+}
+
+/* ===================== Sidebar ===================== */
+#sidebar {
+  background: var(--apple-bg);
+  border-inline-end: 1px solid var(--apple-hairline);
+  padding-top: 0.5rem;
+}
+#sidebar > div {
+  padding-inline-end: 0;
+  gap: 2px;
+}
+
+#sidebar a[href] {
+  margin-inline: 12px;
+  width: calc(100% - 24px);
+  padding-block: 7px;
+  padding-inline-start: 10px;
+  border-radius: 8px;
+  color: rgb(var(--immich-fg));
+  transition: none;
+}
+.dark #sidebar a[href] {
+  color: rgb(var(--immich-dark-fg));
+}
+#sidebar a[href] > div {
+  gap: 12px;
+}
+#sidebar a[href] span {
+  font-size: 15px;
+  font-weight: 400;
+}
+#sidebar a[href] svg {
+  color: var(--apple-accent);
+  width: 22px;
+  height: 22px;
+}
+#sidebar a[href]:hover {
+  background: var(--apple-hover);
+  color: inherit;
+}
+#sidebar a[aria-current='page'] {
+  background: var(--apple-selected);
+}
+
+/* Section titles ("Library", ...) */
+#sidebar div.ps-6:not(:has(a)) {
+  padding: 18px 22px 6px;
+}
+#sidebar div.ps-6:not(:has(a)) * {
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--apple-label-2);
+}
+
+/* Expand chevrons (Albums) */
+#sidebar button[aria-label] {
+  border-radius: 4px;
+  color: var(--apple-label-2);
+}
+
+/* Hide "Storage space" card; keep the remaining footer pinned to the bottom */
+#sidebar .mt-auto:has(.min-w-52) {
+  display: none;
+}
+#sidebar .mt-auto:has(.min-w-52) + * {
+  margin-top: auto;
+}
+
+/* Server status: keep only the colored dot */
+#sidebar .mt-2.mb-6 p,
+#sidebar .mt-2.mb-6 > div > div:last-child {
+  display: none;
+}
+#sidebar .mt-2.mb-6 > div {
+  min-width: 0;
+}
+
+/* ===================== Photo grid ===================== */
+[data-thumbnail-focus-container] img,
+[data-thumbnail-focus-container] video,
+[data-thumbnail-focus-container] canvas,
+[data-thumbnail-focus-container] .rounded-xl {
+  border-radius: 0;
+}
+[data-thumbnail-focus-container] .bg-linear-to-b {
+  display: none;
+}
+
+/* Selection: no shrink, blue frame + checkmark bottom-right */
+[data-thumbnail-focus-container] .scale-\[0\.85\] {
+  scale: none;
+}
+[data-thumbnail-focus-container][data-selected]::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 3;
+  pointer-events: none;
+  box-shadow: inset 0 0 0 3px var(--apple-accent);
+}
+[data-thumbnail-focus-container] [aria-checked] {
+  top: auto;
+  left: auto;
+  inset-inline-start: auto;
+  bottom: 0;
+  inset-inline-end: 0;
+  padding: 6px;
+}
+[data-thumbnail-focus-container] [aria-checked='true'] .rounded-full {
+  background: #fff;
+}
+[data-thumbnail-focus-container]:not([data-selected]) [aria-checked='false'] {
+  opacity: 0;
+}
+#asset-grid:has([data-selected]) [aria-checked='false'] {
+  opacity: 1;
+}
+[data-thumbnail-focus-container] .bg-immich-primary.opacity-40 {
+  opacity: 0.25;
+  border-radius: 0;
+}
+[data-thumbnail-focus-container]:focus-visible {
+  outline: 3px solid var(--apple-accent);
+  outline-offset: -3px;
+}
+
+/* Day headers: "10 - 13 out., 2026" */
+#asset-grid section[data-group] > div:first-child {
+  font-size: 20px;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+}
+
+#time-label {
+  background: var(--apple-accent);
+  color: #fff;
+}
+
+/* ===================== Albums ===================== */
+[data-testid='album-card'] {
+  border: 0;
+  padding: 10px;
+  border-radius: 10px;
+}
+[data-testid='album-card']:hover {
+  background: transparent;
+}
+[data-testid='album-card'] img {
+  border-radius: 6px;
+  box-shadow: none;
+}
+[data-testid='album-name'],
+[data-testid='album-card']:hover [data-testid='album-name'] {
+  font-size: 15px;
+  font-weight: 600;
+  line-height: 1.3;
+  color: inherit;
+}
+[data-testid='album-card'] p {
+  font-size: 13px;
+  color: var(--apple-label-2);
+}
+
+/* ===================== Photo viewer ===================== */
+#immich-asset-viewer {
+  background: var(--apple-viewer-bg);
+}
+/* Solid toolbar with blue icons instead of the black gradient */
+#immich-asset-viewer .from-black\/40 {
+  background: var(--apple-viewer-bg);
+  filter: none;
+}
+#immich-asset-viewer .from-black\/40 button,
+#immich-asset-viewer .from-black\/40 a {
+  color: var(--apple-accent);
+}
+#immich-asset-viewer .from-black\/40 button:hover,
+#immich-asset-viewer .from-black\/40 a:hover {
+  background: var(--apple-hover);
+}
+/* Prev/next arrows: visible on a light background */
+#immich-asset-viewer > div.my-auto button {
+  color: var(--apple-accent);
+  background: transparent;
+}
+/* Photo sits below the toolbar instead of under it */
+#immich-asset-viewer > [data-viewer-content] {
+  grid-row: 2 / -1;
+}
+
+/* ===================== Misc ===================== */
+::selection {
+  background: color-mix(in srgb, var(--apple-accent) 30%, transparent);
+}
+* {
+  scrollbar-width: thin;
+  scrollbar-color: rgb(0 0 0 / 0.25) transparent;
+}
+.dark * {
+  scrollbar-color: rgb(255 255 255 / 0.25) transparent;
+}
