@@ -2,6 +2,10 @@
 
 A custom CSS theme for [Immich](https://immich.app) inspired by Apple Photos / iCloud Photos.
 
+| Light | Dark |
+| --- | --- |
+| ![Light theme](screenshots/light.png) | ![Dark theme](screenshots/dark.png) |
+
 ## Install
 
 1. Open Immich as an admin.
