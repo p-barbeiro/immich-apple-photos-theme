@@ -63,6 +63,10 @@ body, button, input, textarea, select {
   z-index: 50;
   background: var(--apple-bar);
 }
+/* Selection bar ("3 selected", actions) replaces the header: keep it on top */
+#control-bar {
+  z-index: 60;
+}
 #dashboard-navbar > div {
   padding-block: 0;
   border-color: var(--apple-hairline);
@@ -295,12 +299,6 @@ form[role='search'] > div.absolute svg {
 }
 [data-thumbnail-focus-container] [aria-checked='true'] .rounded-full {
   background: #fff;
-}
-[data-thumbnail-focus-container]:not([data-selected]) [aria-checked='false'] {
-  opacity: 0;
-}
-#asset-grid:has([data-selected]) [aria-checked='false'] {
-  opacity: 1;
 }
 [data-thumbnail-focus-container] .bg-immich-primary.opacity-40 {
   opacity: 0.25;
